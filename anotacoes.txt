@@ -1,0 +1,17 @@
+
+npm install --global expo-cli
+expo init meu-projeto
+
+
+
+
+
+
+
+
+
+
+
+
+
+
