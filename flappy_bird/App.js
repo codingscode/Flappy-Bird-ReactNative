@@ -11,15 +11,20 @@ export default function App() {
     const esquerdoDoPassaro = larguraTela / 2
     const [fundoDoPassaro, setFundoDoPassaro] = useState(alturaTela/2)
     const gravidade = 3
+    let gameTimerId
     
     //iniciar pássaro caindo
     useEffect(() => {
       if (fundoDoPassaro > 0) {
-        setInterval(() => {
+        gameTimerId = setInterval(() => {
           setFundoDoPassaro(fundoDoPassaro => fundoDoPassaro - gravidade)
         }, 1000)
+
+        return () => {
+           clearInterval(gameTimerId)
+        }
       }
-    })
+    }, [fundoDoPassaro])
     
     //console.log(fundoDoPassaro)
 
