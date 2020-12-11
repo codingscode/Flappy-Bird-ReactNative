@@ -2,7 +2,7 @@
 npm install --global expo-cli
 expo init meu-projeto
 
-
+aparece no console do terminal: 360 640
 
 
 
