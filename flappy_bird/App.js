@@ -30,7 +30,7 @@ export default function App() {
 
     return (
       <View style={estilos.container}>
-        <Bird />
+         <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
       </View>
     )
 
