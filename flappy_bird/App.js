@@ -15,7 +15,7 @@ export default function App() {
     let esquerdoDoObstaculoTimerId
     const larguraObstaculo = 60
     const alturaObstaculo = 300
-    const intervalo = 50
+    const intervalo = 200
     const gravidade = 3
     let gameTimerId
     
@@ -37,12 +37,16 @@ export default function App() {
     // iniciar primeiros obstaculos
     useEffect(() => {
       if (esquerdoDoObstaculo > - larguraObstaculo) {
-        esquerdoDoObstaculoTimerId = setInterval(() => {
-            setEsquerdoDoObstaculo(esquerdoDoObstaculo => esquerdoDoObstaculo - 5)
-        }, 30)
+          esquerdoDoObstaculoTimerId = setInterval(() => {
+              setEsquerdoDoObstaculo(esquerdoDoObstaculo => esquerdoDoObstaculo - 5)
+          }, 30)
+
+          return () => { clearInterval(esquerdoDoObstaculoTimerId) }
+      }
+      else {
+          setEsquerdoDoObstaculo(larguraTela)
       }
 
-      return () => { clearInterval(esquerdoDoObstaculoTimerId) }
     }, [esquerdoDoObstaculo])
 
 

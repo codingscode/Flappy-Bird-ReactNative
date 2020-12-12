@@ -12,6 +12,13 @@ obstaculos e movimento de cenario
 
 obstaculos saem agora
 
+obstaculos saem e desaparecem
+
+
+
+
+
+
 
 
 
