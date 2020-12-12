@@ -10,7 +10,7 @@ o fundo não ultrapassa o chão
 
 obstaculos e movimento de cenario
 
-
+obstaculos saem agora
 
 
 

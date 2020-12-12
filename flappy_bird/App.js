@@ -24,7 +24,7 @@ export default function App() {
       if (fundoDoPassaro > 0) {
         gameTimerId = setInterval(() => {
           setFundoDoPassaro(fundoDoPassaro => fundoDoPassaro - gravidade)
-        }, 333)
+        }, 200)
 
         return () => {
            clearInterval(gameTimerId)
@@ -36,7 +36,7 @@ export default function App() {
 
     // iniciar primeiros obstaculos
     useEffect(() => {
-      if (esquerdoDoObstaculo > 0) {
+      if (esquerdoDoObstaculo > - larguraObstaculo) {
         esquerdoDoObstaculoTimerId = setInterval(() => {
             setEsquerdoDoObstaculo(esquerdoDoObstaculo => esquerdoDoObstaculo - 5)
         }, 30)
