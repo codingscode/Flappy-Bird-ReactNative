@@ -14,7 +14,7 @@ obstaculos saem agora
 
 obstaculos saem e desaparecem
 
-
+aparece agora os segundos obstaculos , cores diferentes
 
 
 

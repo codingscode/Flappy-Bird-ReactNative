@@ -12,7 +12,9 @@ export default function App() {
     const esquerdoDoPassaro = larguraTela / 2
     const [fundoDoPassaro, setFundoDoPassaro] = useState(alturaTela/2)
     const [esquerdoDoObstaculo, setEsquerdoDoObstaculo] = useState(larguraTela)
+    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela * 1.5)
     let esquerdoDoObstaculoTimerId
+    let esquerdoDoObstaculoTimerId2
     const larguraObstaculo = 60
     const alturaObstaculo = 300
     const intervalo = 200
@@ -48,12 +50,30 @@ export default function App() {
       }
 
     }, [esquerdoDoObstaculo])
+    
+    // iniciar segundos obstaculos
+    useEffect(() => {
+      if (esquerdoDoObstaculo2 > - larguraObstaculo) {
+          esquerdoDoObstaculoTimerId2 = setInterval(() => {
+              setEsquerdoDoObstaculo2(esquerdoDoObstaculo2 => esquerdoDoObstaculo2 - 5)
+          }, 30)
+
+          return () => { clearInterval(esquerdoDoObstaculoTimerId2) }
+      }
+      else {
+          setEsquerdoDoObstaculo2(larguraTela)
+      }
+
+    }, [esquerdoDoObstaculo2])
+
 
 
     return (
         <View style={estilos.container}>
             <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
-            <Obstaculos esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
+            <Obstaculos cor={'green'} esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
+                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} />
+            <Obstaculos cor={'purple'} esquerdoDoObstaculo={esquerdoDoObstaculo2} larguraObstaculo={larguraObstaculo} 
                     alturaObstaculo={alturaObstaculo} intervalo={intervalo} />
         </View>
     )
