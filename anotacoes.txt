@@ -8,7 +8,7 @@ o retangulo começa a se mexer
 
 o fundo não ultrapassa o chão
 
-
+obstaculos e movimento de cenario
 
 
 
