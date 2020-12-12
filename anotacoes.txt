@@ -6,7 +6,7 @@ aparece no console do terminal: 360 640
 
 o retangulo começa a se mexer
 
-
+o fundo não ultrapassa o chão
 
 
 

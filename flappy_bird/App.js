@@ -26,7 +26,7 @@ export default function App() {
       }
     }, [fundoDoPassaro])
     
-    console.log(fundoDoPassaro)
+    //console.log(fundoDoPassaro)
 
     return (
       <View style={estilos.container}>

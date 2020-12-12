@@ -12,7 +12,7 @@ export default Passaro = ({ fundoDoPassaro, esquerdoDoPassaro }) => {
               width: passaroLargura,
               height: passaroAltura,
               left: esquerdoDoPassaro - (passaroLargura/2),
-              bottom: fundoDoPassaro - (passaroAltura/2)
+              bottom: fundoDoPassaro
                }} />
       )
      
