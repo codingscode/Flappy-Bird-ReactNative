@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions, TouchableWithoutFeedback } from 'react-native'
 import Bird from './components/Bird.js'
 import Obstaculos from './components/Obstaculos'
 
@@ -11,7 +11,7 @@ export default function App() {
     const esquerdoDoPassaro = larguraTela / 2
     const [fundoDoPassaro, setFundoDoPassaro] = useState(alturaTela / 2)
     const [esquerdoDoObstaculo, setEsquerdoDoObstaculo] = useState(larguraTela)
-    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela + larguraTela/2 + 30)
+    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela*1.5 + 30)
     const [alturaNegativaObstaculos, setAlturaNegativaObstaculos] = useState(0)
     const [alturaNegativaObstaculos2, setAlturaNegativaObstaculos2] = useState(0)
     const gravidade = 3
@@ -21,6 +21,7 @@ export default function App() {
     let gameTimerId
     let obstaculoTimerId
     let obstaculoTimerId2
+    let [jogoTerminado, setJogoTerminado] = useState(false)
   
     //iniciar pássaro caindo
     useEffect(() => {
@@ -37,6 +38,13 @@ export default function App() {
     
     //console.log(fundoDoPassaro)
   
+    const pular = () => {
+      if (!jogoTerminado && (fundoDoPassaro < alturaTela) ) {
+         setFundoDoPassaro(fundoDoPassaro => fundoDoPassaro + 50 )
+         console.log('pulou')
+      }
+    }
+
     // iniciar primeiros obstaculos
     useEffect(() => {
       if (esquerdoDoObstaculo > -larguraObstaculo) {
@@ -90,18 +98,20 @@ export default function App() {
       clearInterval(gameTimerId)
       clearInterval(obstaculoTimerId)
       clearInterval(obstaculoTimerId2)
-      
+      setJogoTerminado(true)
     }
   
 
     return (
-        <View style={estilos.container}>
-            <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
-            <Obstaculos cor={'green'} esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
-                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos} />
-            <Obstaculos cor={'purple'} esquerdoDoObstaculo={esquerdoDoObstaculo2} larguraObstaculo={larguraObstaculo} 
-                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos2} />
-        </View>
+        <TouchableWithoutFeedback onPress={pular}>
+            <View style={estilos.container}>
+                <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
+                <Obstaculos cor={'green'} esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
+                        alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos} />
+                <Obstaculos cor={'purple'} esquerdoDoObstaculo={esquerdoDoObstaculo2} larguraObstaculo={larguraObstaculo} 
+                        alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos2} />
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
