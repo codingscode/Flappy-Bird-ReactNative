@@ -12,7 +12,9 @@ export default function App() {
     const esquerdoDoPassaro = larguraTela / 2
     const [fundoDoPassaro, setFundoDoPassaro] = useState(alturaTela/2)
     const [esquerdoDoObstaculo, setEsquerdoDoObstaculo] = useState(larguraTela)
-    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela * 1.5)
+    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela * 1.5 + 30)
+    const [alturaNegativaObstaculos, setAlturaNegativaObstaculos] = useState(0)
+    const [alturaNegativaObstaculos2, setAlturaNegativaObstaculos2] = useState(0)
     let esquerdoDoObstaculoTimerId
     let esquerdoDoObstaculoTimerId2
     const larguraObstaculo = 60
@@ -47,6 +49,7 @@ export default function App() {
       }
       else {
           setEsquerdoDoObstaculo(larguraTela)
+          setAlturaNegativaObstaculos(- Math.random() * 100)
       }
 
     }, [esquerdoDoObstaculo])
@@ -62,6 +65,7 @@ export default function App() {
       }
       else {
           setEsquerdoDoObstaculo2(larguraTela)
+          setAlturaNegativaObstaculos2(- Math.random() * 100)
       }
 
     }, [esquerdoDoObstaculo2])
@@ -72,9 +76,9 @@ export default function App() {
         <View style={estilos.container}>
             <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
             <Obstaculos cor={'green'} esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
-                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} />
+                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos} />
             <Obstaculos cor={'purple'} esquerdoDoObstaculo={esquerdoDoObstaculo2} larguraObstaculo={larguraObstaculo} 
-                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} />
+                    alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos2} />
         </View>
     )
 

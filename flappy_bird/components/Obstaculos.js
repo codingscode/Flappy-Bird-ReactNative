@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 
 
-export default Obstaculos = ({ cor, larguraObstaculo, alturaObstaculo, intervalo, esquerdoDoObstaculo }) => {
+export default Obstaculos = ({ cor, larguraObstaculo, alturaObstaculo, intervalo, esquerdoDoObstaculo, fundoAleatorio }) => {
     
 
       return (
@@ -13,13 +13,13 @@ export default Obstaculos = ({ cor, larguraObstaculo, alturaObstaculo, intervalo
                     width: larguraObstaculo,
                     height: alturaObstaculo,
                     left: esquerdoDoObstaculo,
-                    bottom: 0 + alturaObstaculo + intervalo }}/>
+                    bottom: fundoAleatorio + alturaObstaculo + intervalo }}/>
               <View style={{ position: 'absolute',
                     backgroundColor: cor,
                     width: larguraObstaculo,
                     height: alturaObstaculo,
                     left: esquerdoDoObstaculo,
-                    bottom: 0}}/>
+                    bottom: fundoAleatorio}}/>
           </>
       )
      
