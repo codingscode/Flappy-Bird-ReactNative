@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, Dimensions, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, Dimensions, TouchableWithoutFeedback } from 'react-native'
 import Bird from './components/Bird.js'
 import Obstaculos from './components/Obstaculos'
 
@@ -22,6 +22,7 @@ export default function App() {
     let obstaculoTimerId
     let obstaculoTimerId2
     let [jogoTerminado, setJogoTerminado] = useState(false)
+    const [pontuacao, setPontuacao] = useState(0)
   
     //iniciar pássaro caindo
     useEffect(() => {
@@ -56,6 +57,7 @@ export default function App() {
       else {
           setEsquerdoDoObstaculo(larguraTela)
           setAlturaNegativaObstaculos(-Math.random() * 100)
+          setPontuacao(pontuacao => pontuacao + 1)
       }
     }, [esquerdoDoObstaculo])
 
@@ -70,6 +72,7 @@ export default function App() {
       else {
           setEsquerdoDoObstaculo2(larguraTela)
           setAlturaNegativaObstaculos2(-Math.random() * 100)
+          setPontuacao(pontuacao => pontuacao + 1)
       }
 
     }, [esquerdoDoObstaculo2])
@@ -105,6 +108,7 @@ export default function App() {
     return (
         <TouchableWithoutFeedback onPress={pular}>
             <View style={estilos.container}>
+              {jogoTerminado && <Text>{`pontuação: ${pontuacao}`}</Text>}
                 <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
                 <Obstaculos cor={'green'} esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
                         alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos} />
