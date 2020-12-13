@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-export default Passaro = ({ fundoDoPassaro, esquerdoDoPassaro }) => {
+const Passaro = ({ fundoDoPassaro, esquerdoDoPassaro }) => {
       const passaroLargura = 50
       const passaroAltura = 60
 
@@ -17,3 +17,4 @@ export default Passaro = ({ fundoDoPassaro, esquerdoDoPassaro }) => {
       )
      
 }
+export default Passaro

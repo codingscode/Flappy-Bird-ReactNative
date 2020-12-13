@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import Bird from './components/Bird.js'
 import Obstaculos from './components/Obstaculos'
-
 
 export default function App() {
     const larguraTela = Dimensions.get('screen').width
@@ -10,26 +9,26 @@ export default function App() {
     //console.log(larguraTela, alturaTela)
 
     const esquerdoDoPassaro = larguraTela / 2
-    const [fundoDoPassaro, setFundoDoPassaro] = useState(alturaTela/2)
+    const [fundoDoPassaro, setFundoDoPassaro] = useState(alturaTela / 2)
     const [esquerdoDoObstaculo, setEsquerdoDoObstaculo] = useState(larguraTela)
-    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela * 1.5 + 30)
+    const [esquerdoDoObstaculo2, setEsquerdoDoObstaculo2] = useState(larguraTela + larguraTela/2 + 30)
     const [alturaNegativaObstaculos, setAlturaNegativaObstaculos] = useState(0)
     const [alturaNegativaObstaculos2, setAlturaNegativaObstaculos2] = useState(0)
-    let esquerdoDoObstaculoTimerId
-    let esquerdoDoObstaculoTimerId2
-    const larguraObstaculo = 60
-    const alturaObstaculo = 300
-    const intervalo = 200
     const gravidade = 3
+    let larguraObstaculo = 60
+    let alturaObstaculo = 300
+    let intervalo = 200
     let gameTimerId
-    
+    let obstaculoTimerId
+    let obstaculoTimerId2
+  
     //iniciar pássaro caindo
     useEffect(() => {
       if (fundoDoPassaro > 0) {
         gameTimerId = setInterval(() => {
           setFundoDoPassaro(fundoDoPassaro => fundoDoPassaro - gravidade)
-        }, 200)
-
+        }, 30)
+  
         return () => {
            clearInterval(gameTimerId)
         }
@@ -37,40 +36,63 @@ export default function App() {
     }, [fundoDoPassaro])
     
     //console.log(fundoDoPassaro)
-
+  
     // iniciar primeiros obstaculos
     useEffect(() => {
-      if (esquerdoDoObstaculo > - larguraObstaculo) {
-          esquerdoDoObstaculoTimerId = setInterval(() => {
-              setEsquerdoDoObstaculo(esquerdoDoObstaculo => esquerdoDoObstaculo - 5)
+      if (esquerdoDoObstaculo > -larguraObstaculo) {
+          obstaculoTimerId = setInterval(() => {
+            setEsquerdoDoObstaculo(esquerdoDoObstaculo => esquerdoDoObstaculo - 5)
           }, 30)
-
-          return () => { clearInterval(esquerdoDoObstaculoTimerId) }
+          return () => { clearInterval(obstaculoTimerId) }
       }
       else {
           setEsquerdoDoObstaculo(larguraTela)
-          setAlturaNegativaObstaculos(- Math.random() * 100)
+          setAlturaNegativaObstaculos(-Math.random() * 100)
       }
-
     }, [esquerdoDoObstaculo])
-    
+
     // iniciar segundos obstaculos
     useEffect(() => {
-      if (esquerdoDoObstaculo2 > - larguraObstaculo) {
-          esquerdoDoObstaculoTimerId2 = setInterval(() => {
-              setEsquerdoDoObstaculo2(esquerdoDoObstaculo2 => esquerdoDoObstaculo2 - 5)
-          }, 30)
-
-          return () => { clearInterval(esquerdoDoObstaculoTimerId2) }
+      if (esquerdoDoObstaculo2 > -larguraObstaculo) {
+        obstaculoTimerId2 = setInterval(() => {
+          setEsquerdoDoObstaculo2(esquerdoDoObstaculo2 => esquerdoDoObstaculo2 - 5)
+        }, 30)
+        return () => { clearInterval(obstaculoTimerId2) }
       }
       else {
           setEsquerdoDoObstaculo2(larguraTela)
-          setAlturaNegativaObstaculos2(- Math.random() * 100)
+          setAlturaNegativaObstaculos2(-Math.random() * 100)
       }
 
     }, [esquerdoDoObstaculo2])
 
+    // checar colisão
+    useEffect(() => {
+       
+      if (
+      ((fundoDoPassaro < (alturaNegativaObstaculos + alturaObstaculo + 30) ||
+        fundoDoPassaro > (alturaNegativaObstaculos + alturaObstaculo + intervalo -30)) &&
+        (esquerdoDoObstaculo > larguraTela/2 -30 && esquerdoDoObstaculo < larguraTela/2 + 30 )
+        )
+          || 
+        ((fundoDoPassaro < (alturaNegativaObstaculos2 + alturaObstaculo + 30) ||
+        fundoDoPassaro > (alturaNegativaObstaculos2 + alturaObstaculo + intervalo -30)) &&
+        (esquerdoDoObstaculo2 > larguraTela/2 -30 && esquerdoDoObstaculo2 < larguraTela/2 + 30 )
+        )
+        ) 
+        {
+           console.log('fim de jogo')
+           fimDeJogo()
+        }
+    })
 
+    const fimDeJogo = () => {
+      clearInterval(gameTimerId)
+      clearInterval(obstaculoTimerId)
+      clearInterval(obstaculoTimerId2)
+      
+    }
+  
 
     return (
         <View style={estilos.container}>
@@ -81,14 +103,13 @@ export default function App() {
                     alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos2} />
         </View>
     )
-
 }
 
 const estilos = StyleSheet.create({
-      container: {
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'white',
-      },
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
 })
