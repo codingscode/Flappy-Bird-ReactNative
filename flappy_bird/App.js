@@ -108,7 +108,7 @@ export default function App() {
     return (
         <TouchableWithoutFeedback onPress={pular}>
             <View style={estilos.container}>
-              {jogoTerminado && <Text>{`pontuação: ${pontuacao}`}</Text>}
+              {jogoTerminado && <Text style={{zIndex: 30}}>{`pontuação: ${pontuacao}`}</Text>}
                 <Bird fundoDoPassaro={fundoDoPassaro} esquerdoDoPassaro={esquerdoDoPassaro} />
                 <Obstaculos cor={'green'} esquerdoDoObstaculo={esquerdoDoObstaculo} larguraObstaculo={larguraObstaculo} 
                         alturaObstaculo={alturaObstaculo} intervalo={intervalo} fundoAleatorio={alturaNegativaObstaculos} />
